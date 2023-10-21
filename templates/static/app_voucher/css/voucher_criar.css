@@ -1,0 +1,37 @@
+body{
+  padding: 0px;
+  margin: 0px;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+div{
+  padding: 0px;
+  margin: 0px;
+}
+
+form{
+  border: solid 1px;
+  height: auto;
+  width: 350px;
+  margin: 0px auto;
+  margin-top: 10%;
+  padding: 10px;
+}
+
+input{
+  margin-left:auto;;
+}
+.div-campo{
+  display: flex;
+  padding-bottom: 5px;
+  align-items: center;
+}
+.div-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.enviar {
+  width: 100%;
+}

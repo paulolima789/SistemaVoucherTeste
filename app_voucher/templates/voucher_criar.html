@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+Criar
+{% endblock %}
+
+{% block navItem %}
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  Quantidade de Vouchers
+  </a>
+  <ul class="dropdown-menu">
+  <li><a class="dropdown-item" href="{% url 'criar' %}">Vouchers Criados: {{contadorVocher}}</a></li>
+  <li><a class="dropdown-item" href="{% url 'criar' %}">Vouchers de Limpeza: {{contadorLimpeza}} | limite = 3</a></li>
+  <li><a class="dropdown-item" href="{% url 'criar' %}">Vouchers Normal: {{contadorSemLimpeza}} | limite = 10</a></li>
+  </ul>
+</li>
+{% endblock %}
+
+{% block main %}
+    <div class="justify-content-center m-auto mt-5 w-50">
+      <form action="{% url 'criar' %}" method="POST"> {% csrf_token %}
+        <div class="div-campo">
+          <label class="exampleFormControlInput1">MATRÍCULA:</label>
+          <input class="form-control" type="text" name="matricula" placeholder='AM3120XXXXXX' required>
+        </div>
+        <div class="div-campo">
+          <label>NOME:</label>
+          <input class="form-control" type="text" name="nomeFiliado" required>
+        </div>
+        <div class="div-campo">
+          <label>ESPECIALIDADE:</label>
+          <select class="form-select" aria-label="Default select example" name="especialidade" required>
+            <option value='' selected>Selecione</option>
+            {% for especialidade in allEspecialidade %}
+                <option>{{ especialidade }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="div-campo">
+          <label>UNIDADE:</label>
+          <select class="form-select" aria-label="Default select example" name="unidade" required>
+            <option selected>Selecione</option>
+            {% for value, label in Zonas %}
+                <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="div-campo">
+          <label>DATA DA CONSULTA:</label>
+          <input class="form-control" type="date" name="dataDaConsulta" placeholder="DD/MM/YYYY" required>
+        </div>
+
+        {% if user.is_staff %}
+        <div class="div-campo">
+          <label>CONSULTOR:</label>
+          <!--<input class="form-control" type="text" name="consultor">-->
+          <select class="form-select" aria-label="Default select example" name="consultor">
+            <option value="" selected>Selecione</option>
+            {% for user in allUsers %}
+                <option>{{user}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        {% endif %}
+
+        <div class='btn-group mt-2'>
+          <button class="btn btn-success" type="submit">Criar</button>
+        </div>
+        <div class="div-btn">
+          {% if not user.is_staff %}
+          <span>{{status}}</span>
+          {% endif %}
+          <span>{{alertstatus}}</span>
+        </div>
+      </form>
+    </div>
+{% endblock %}

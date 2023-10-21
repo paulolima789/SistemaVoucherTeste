@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}
+Registros
+{% endblock %}
+
+{% block main %}
+<body>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Matricula</th>
+              <th scope="col">Nome Filiado</th>
+              <th scope="col">Especialidade</th>
+              <th scope="col">Unidade</th>
+              <th scope="col">Consultor</th>
+              <th scope="col">Data Da Consulta</th>
+              <th scope="col">Data da Criação</th>
+              {% if user.is_staff %}
+              <th scope="col">
+                <form class="d-flex" role="search" action="{% url 'registros' %}" method="POST"> {% csrf_token %}
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="pesquisa">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </th>
+              {% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for voucher in vouchers%}
+            <tr>
+              <th scope="row">{{voucher.id}}</th>
+              <td>{{voucher.matricula}}</td>
+              <td>{{voucher.nomeFiliado}}</td>
+              <td>{{voucher.especialidade}}</td>
+              <td>{{voucher.get_unidade_display|title}}</td>
+              <td>{{voucher.consultor}}</td>
+              <td>{{voucher.dataDaConsulta}}</td>
+              <td>{{voucher.dataDeGeracao|date:"d/m/Y"}}</td>
+              <td>
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                  <form action="{% url 'ver' %}" method="POST"> {% csrf_token %}
+                    <input type="hidden" name="voucher" value="{{voucher.id}}">
+                    <input value="Ver" type="submit" class="btn btn-success">
+                  </form>
+                  
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+    <!-- pagination end -->
+    <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+    </div>
+</body>
+{% endblock %}

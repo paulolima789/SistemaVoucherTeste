@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'app_voucher/css/voucher_normal.css' %}">
+{% endblock %}
+{% block title %}
+Ver
+{% endblock %}
+
+{% block mainDiv %}
+  <body>
+
+    <div class="voucher">
+      <div class="cabeçalho">
+        <img class="imgvoucher" src="{% static 'app_voucher/img/voucher.png' %}">
+        <h1 class="titulo">Consulta Médica</h1>
+      </div>
+
+      <div class="form">
+        <img class="img_fundo" src="{% static 'app_voucher/img/fundo.png' %}" alt="">
+        <div class="form1">
+            <p>MATRÍCULA: <span>{{matricula|upper}}</span></p>
+            <p>ESPECIALIDADE: <span>{{especialidade|upper}}</span></p>
+            <p>DATA DA CONSULTA: <span>{{dataDaConsulta}}</span></p>
+            <p>CONSULTOR: <span>{{consultor|upper}}</span></p>
+        </div>
+          <div class="form2">
+            <p>NOME: <span>{{nomeFiliado|upper}}</span></p>
+            <p>UNIDADE (Amor Saúde): <span>{{unidade|upper}}</span></p>
+          </div>
+        </div>
+          <br>
+        <div class="Assinatura">
+          <img class="img_assinatura" src="{% static 'app_voucher/img/assinatura.png' %}" alt="">
+          <p>AUTORIZADO POR: ___________________________________    &nbsp;&nbsp; DATA: {{dataDeGeracao|date:"d/m/Y"}}</p> 
+        </div>
+    </div>
+  </body>
+
+{% endblock %}

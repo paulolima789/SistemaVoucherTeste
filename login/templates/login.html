@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+  <title>Login</title>
+</head>
+<body>
+    <div class="login-container">
+        <form class="login-form" action="{% url 'login' %}" method="POST"> {% csrf_token %}
+            <br>
+            <div class="logo">
+                <img src="{% static 'app_voucher/img/fundo.png' %}" alt="Logo da Empresa">
+            </div>
+            <input type="text" placeholder="Nome de usuário" name="username" required>
+            <input type="password" placeholder="Senha" name="senha" required>
+            <span><p>{{erro}}</p></span>
+            <button type="submit">Entrar</button>
+            <a href="{% url 'cadastro'%}">Cadastrar</a>
+        </form>
+    </div>
+    
+</body>
+</html>
+

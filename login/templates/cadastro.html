@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'login/css/cadastro.css' %}">
+  <title>Cadastro</title>
+</head>
+<body>
+  <div class="register-container">
+    <form class="register-form" action="{% url 'cadastro' %}" method="POST"> {% csrf_token %}
+      <div class="logo">
+        <img src="{% static 'app_voucher/img/fundo.png' %}" alt="Logo da Empresa">
+      </div>
+      <input type="text" placeholder="Nome Inicial" name="first_name" value="{{first_name}}" required>
+      <input type="text" placeholder="Nome Final" name="last_name" value="{{last_name}}" required>
+      <input type="text" placeholder="Usuario" name="username" value="{{username}}" required>
+      <span><p>{{erroUser}}</p></span>
+      <input type="email" placeholder="E-mail" name="email" value="{{email}}" required>
+      <span><p>{{erroEmail}}</p></span>
+      <input type="password" placeholder="Senha" name="senha" value="{{senha}}" required>
+      <input type="password" placeholder="Confirme a Senha" name="confirmar_senha" value="{{confirmar_senha}}" required>
+      <span><p>{{erroSenha}}</p></span>
+      <button type="submit">Cadastrar</button>
+      <a href="{% url 'login' %}">Já sou cadastrado</a>
+    </form>
+  </div>
+</body>
+</html>
+
+
