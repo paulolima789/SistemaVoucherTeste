@@ -38,10 +38,13 @@ def criar(request,alertstatus=""):
         except:
             pass
         # pega a quantidade de voucher sem limpeza odontologica
-        getUser = User.objects.get(username=request.user)
-        qtd_voucher = Voucher.objects.filter(useuario__id=getUser.id)
-        qtd_voucher = qtd_voucher.exclude(especialidade=getEspecialidade.id)
-        contadorSemLimpeza = qtd_voucher.count()
+        try:
+            getUser = User.objects.get(username=request.user)
+            qtd_voucher = Voucher.objects.filter(useuario__id=getUser.id)
+            qtd_voucher = qtd_voucher.exclude(especialidade=getEspecialidade.id)
+            contadorSemLimpeza = qtd_voucher.count()
+        except:
+            pass
         # pega a quantidade de voucher de limpeza odontologica
         try:
             getEspecialidade = Especialidade.objects.get(nome='LIMPEZA ODONTOLOGICA')
@@ -51,7 +54,10 @@ def criar(request,alertstatus=""):
             pass
         
         #pega as especialidades
-        allEspecialidade = Especialidade.objects.all()
+        try:
+            allEspecialidade = Especialidade.objects.all()
+        except:
+            pass
         #pega todos os usuarios
         today = timezone.now()
         allUsers = User.objects.all()
