@@ -33,16 +33,22 @@ def criar(request,alertstatus=""):
     if request.method == 'GET':
         alertstatus = request.session.get('alertstatus')
         #pega a especialidade LIMPEZA ODONTOLOGICA
-        getEspecialidade = Especialidade.objects.get(nome='LIMPEZA ODONTOLOGICA')
+        try:
+            getEspecialidade = Especialidade.objects.get(nome='LIMPEZA ODONTOLOGICA')
+        except:
+            pass
         # pega a quantidade de voucher sem limpeza odontologica
         getUser = User.objects.get(username=request.user)
         qtd_voucher = Voucher.objects.filter(useuario__id=getUser.id)
         qtd_voucher = qtd_voucher.exclude(especialidade=getEspecialidade.id)
         contadorSemLimpeza = qtd_voucher.count()
         # pega a quantidade de voucher de limpeza odontologica
-        getEspecialidade = Especialidade.objects.get(nome='LIMPEZA ODONTOLOGICA')
-        qtd_voucherLimpeza = Voucher.objects.filter(useuario__id=getUser.id,especialidade=getEspecialidade)
-        contadorLimpeza = qtd_voucherLimpeza.count()
+        try:
+            getEspecialidade = Especialidade.objects.get(nome='LIMPEZA ODONTOLOGICA')
+            qtd_voucherLimpeza = Voucher.objects.filter(useuario__id=getUser.id,especialidade=getEspecialidade)
+            contadorLimpeza = qtd_voucherLimpeza.count()
+        except:
+            pass
         
         #pega as especialidades
         allEspecialidade = Especialidade.objects.all()
