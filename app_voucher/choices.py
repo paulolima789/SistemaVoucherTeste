@@ -4,4 +4,5 @@ class ChoicesZona(TextChoices):
     ZONA_LESTE = ('ZL', 'Zona Leste')
     CIDADE_NOVA = ('CN', 'Cidade Nova')
     CENTRO = ('C', 'Centro')
-    OUTROS = ('O', 'Otros')
+    SANTO_ANTONIO = ('S', 'Santo Antônio')
+    OUTROS = ('O', 'Outros')
